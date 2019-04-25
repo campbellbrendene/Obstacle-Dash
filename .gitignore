@@ -1,0 +1,11 @@
+.vscode/ipch
+
+bin/*
+build/*
+lib/*
+release/*
+
+!bin/.gitkeep
+!build/.gitkeep
+!lib/.gitkeep
+!release/.gitkeep
