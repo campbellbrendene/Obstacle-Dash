@@ -33,16 +33,17 @@ using namespace std;
 void gameLoop();
 void quit(int);
 
+const char *VERSION = "0.0.2";
+
 const unsigned int GAME_W = 60;
 const unsigned int GAME_H = 40;
 const unsigned int OBSTACLE_COUNT = 1;
-const unsigned int OBSTACLE_PER = 1000;
+const unsigned int OBSTACLE_PER = 30;
 
 bool RUNNING = true;
 int DELAY = 100; // ms
 
 GameState state(GAME_W, GAME_H);
-// KeyboardAgent onKey_Agent(onKey);
 
 int main()
 {
@@ -54,9 +55,23 @@ int main()
 
   srand(time(0));
 
+  int n = 3;
+
+  mvprintw(n++, state.cols - (strlen("_____________        _____             ______     ") / 2), "_____________        _____             ______     ");
+  mvprintw(n++, state.cols - (strlen("__  __ \\__  /__________  /______ _________  /____ ") / 2), "__  __ \\__  /__________  /______ _________  /____ ");
+  mvprintw(n++, state.cols - (strlen("_  / / /_  __ \\_  ___/  __/  __ `/  ___/_  /_  _ \\") / 2), "_  / / /_  __ \\_  ___/  __/  __ `/  ___/_  /_  _ \\");
+  mvprintw(n++, state.cols - (strlen("/ /_/ /_  /_/ /(__  )/ /_ / /_/ // /__ _  / /  __/") / 2), "/ /_/ /_  /_/ /(__  )/ /_ / /_/ // /__ _  / /  __/");
+  mvprintw(n++, state.cols - (strlen("\\____/ /_.___//____/ \\__/ \\__,_/ \\___/ /_/  \\___/ ") / 2), "\\____/ /_.___//____/ \\__/ \\__,_/ \\___/ /_/  \\___/ ");
+  mvprintw(n++, state.cols - (strlen("                                                  ") / 2), "                                                  ");
+  mvprintw(n++, state.cols - (strlen("         ________              ______             ") / 2), "         ________              ______             ");
+  mvprintw(n++, state.cols - (strlen("         ___  __ \\_____ __________  /_            ") / 2), "         ___  __ \\_____ __________  /_            ");
+  mvprintw(n++, state.cols - (strlen("         __  / / /  __ `/_  ___/_  __ \\           ") / 2), "         __  / / /  __ `/_  ___/_  __ \\           ");
+  mvprintw(n++, state.cols - (strlen("         _  /_/ // /_/ /_(__  )_  / / /           ") / 2), "         _  /_/ // /_/ /_(__  )_  / / /           ");
+  mvprintw(n++, state.cols - (strlen("         /_____/ \\__,_/ /____/ /_/ /_/            ") / 2), "         /_____/ \\__,_/ /____/ /_/ /_/            ");
+
   mvprintw(state.rows - 4,
-           state.cols - (strlen("Obstacle Dash v0.0.1") / 2),
-           "Obstacle Dash v0.0.1");
+           state.cols - ((strlen("Obstacle Dash v") + strlen(VERSION)) / 2),
+           "Obstacle Dash v%s", VERSION);
   mvprintw(state.rows - 2,
            state.cols - (strlen("Copyright (C) 2019 Brenden Campbell") / 2),
            "Copyright (C) 2019 Brenden Campbell");
@@ -66,17 +81,20 @@ int main()
   mvprintw(state.rows,
            state.cols - (strlen("campbellbrendene.github.io") / 2),
            "campbellbrendene.github.io");
-  mvprintw((state.rows / 2) - 1, state.cols - (strlen("Welcome to Obstacle Dash!") / 2), "Welcome to Obstacle Dash!");
+
+  mvprintw((state.rows / 2),
+           state.cols - (strlen("Welcome to Obstacle Dash!") / 2),
+           "Welcome to Obstacle Dash!");
   move(0, 0);
   refresh();
   usleep(3000 * 1000);
-  mvprintw((state.rows / 2),
+  mvprintw((state.rows / 2) + 1,
            state.cols - (strlen("Press LEFT and RIGHT arrows to dodge falling obstacles. SPACE to pause.") / 2),
            "Press LEFT and RIGHT arrows to dodge falling obstacles. SPACE to pause.");
   move(0, 0);
   refresh();
   usleep(3000 * 1000);
-  mvprintw((state.rows / 2) + 3,
+  mvprintw((state.rows / 2) + 2,
            state.cols - (strlen("Press any key to start!") / 2),
            "Press any key to start!");
   move(0, 0);
