@@ -38,10 +38,12 @@ GameState::GameState(unsigned int _cols, unsigned int _rows)
 
   score = 0;
 
-  field = new bool*[rows];
-  for (int i = 0; i < rows; i++) {
+  field = new bool *[rows];
+  for (int i = 0; i < rows; i++)
+  {
     field[i] = new bool[cols];
-    for (int j = 0; j < cols; j++) {
+    for (int j = 0; j < cols; j++)
+    {
       field[i][j] = false;
     }
   }
@@ -53,7 +55,8 @@ GameState::GameState(unsigned int _cols, unsigned int _rows)
 
 GameState::~GameState()
 {
-  for (int i = 0; i < rows; i++) {
+  for (int i = 0; i < rows; i++)
+  {
     delete[] field[i];
   }
   delete[] field;
